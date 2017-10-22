@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="whiteFaded">#E8FFFFFF</color>
+    <color name="strawberry">#E6092C</color>
+    <color name="macCheese">#FF6701</color>
+    <color name="orange">#FF9600</color>
+    <color name="banana">#FFC800</color>
+    <color name="lime">#C5DE35</color>
+    <color name="guacamole">#73CF42</color>
+    <color name="kale">#00B551</color>
+    <color name="secondaryText">#727272</color>
+    <color name="light_gray">#a3a3a3</color>
+
+</resources>
