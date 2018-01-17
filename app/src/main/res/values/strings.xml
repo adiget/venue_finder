@@ -7,4 +7,7 @@
     <string name="venue_row_rating">Rating: </string>
     <string name="transition.thumbnail" translatable="false">itemThumbnail</string>
     <string name="venues_screen_label">Venues Near Me</string>
+
+    <string name="show_as_list">Show as list</string>
+    <string name="show_as_grid">Show as grid</string>
 </resources>

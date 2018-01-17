@@ -29,7 +29,7 @@ public class APITest {
         final CountDownLatch signal = new CountDownLatch(1);
         final boolean[] statuses = {false};
 
-        Call<FourSquareResponse> venueCall = FourSquareService.getAPI().venuesNearLocation(Constants.DEFAULT_LOCATION);
+        Call<FourSquareResponse> venueCall = FourSquareService.INSTANCE.getAPI().venuesNearLocation(Constants.INSTANCE.getDEFAULT_LOCATION());
 
         venueCall.enqueue(new Callback<FourSquareResponse>() {
             @Override

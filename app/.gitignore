@@ -1,3 +1,5 @@
 /build/generated
 /build/intermediates
 /build/tmp
+/build/kotlin
+/build/outputs

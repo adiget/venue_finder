@@ -41,4 +41,13 @@
     <include layout="@layout/view_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp"
+        android:visibility="gone" />
+
 </android.support.design.widget.CoordinatorLayout>
