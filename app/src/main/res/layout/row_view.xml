@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.example.annada.eventfinder.views.SquareImageView
+        <ImageView
             android:id="@+id/venue_icon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:transitionName="@string/transition.thumbnail"/>
 
