@@ -1,6 +1,8 @@
 package com.ags.annada.eventfinder.model.categoryapi
 
 import com.ags.annada.eventfinder.model.Icon
+import com.ags.annada.eventfinder.model.Item
+import com.ags.annada.eventfinder.model.Meta
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -9,23 +11,13 @@ import com.google.gson.annotations.SerializedName
  * Date : 22/10/2017.
  */
 
-class Category_ {
-    @SerializedName("categories")
-    @Expose
-    var categories: List<Any>? = null
-    @SerializedName("icon")
-    @Expose
-    var icon: Icon? = null
-    @SerializedName("id")
-    @Expose
-    var id: String? = null
-    @SerializedName("name")
-    @Expose
-    var name: String? = null
-    @SerializedName("pluralName")
-    @Expose
-    var pluralName: String? = null
-    @SerializedName("shortName")
-    @Expose
-    var shortName: String? = null
-}
+data class Category_(val categories: List<Any>?, val icon: Icon?, val id: String?, val name: String?,
+                     val pluralName: String?, val shortName: String?)
+
+data class CategoryApiCategory(val categories: List<Category_>?)
+
+data class CategoryResponse(val categories: List<CategoryApiCategory>?)
+
+data class Notification(val item: Item?, val type: String?)
+
+data class CategoryListResponse(val meta: Meta?, val notifications: List<Notification>?, val response: CategoryResponse?)

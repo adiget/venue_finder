@@ -7,6 +7,4 @@ import com.ags.annada.eventfinder.model.venueapi.FourSquareResponseOrig
  * Created: 21/10/2017
  */
 
-class FourSquareJSON {
-    var response: FourSquareResponseOrig? = null
-}
+data class FourSquareJSON(val response: FourSquareResponseOrig?)

@@ -21,12 +21,19 @@
         <item name="android:textColorSecondary">@color/white</item>
     </style>
 
-    <style name="PlacePickerScreenTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="PlacePickerScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:toolbarStyle">@color/colorPrimary</item>
     </style>
+
+
+        <style name="HeaderBar">
+            <item name="android:background">@color/colorPrimary</item>
+        </style>
+
 </resources>

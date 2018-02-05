@@ -29,6 +29,7 @@ import com.ags.annada.eventfinder.R
 import com.ags.annada.eventfinder.adapters.CategoryAdapter
 import com.ags.annada.eventfinder.adapters.VenueRecyclerAdapter
 import com.ags.annada.eventfinder.globals.Constants
+import com.ags.annada.eventfinder.globals.Constants.CATEGORY_MODEL_KEY
 import com.ags.annada.eventfinder.model.FourSquareResponse
 import com.ags.annada.eventfinder.model.VenueModel
 import com.ags.annada.eventfinder.model.categoryapi.CategoryListResponse
@@ -57,13 +58,24 @@ class MainActivity : AppCompatActivity(), LocationListener {
     lateinit private var menu: Menu
     private var isListView: Boolean = false
 
+    companion object {
+        //The App specific constant when requesting the Location Permission
+        private val PERMISSION_ACCESS_FINE_LOCATION = 1
+        var mVenueList = ArrayList<VenueModel>()
+        var mCategoriesList = ArrayList<String>()
+        var mCategoriesListNw = ArrayList<CategoryModel>()
+        private var COLUMN_COUNT: Int = 0
+    }
+
     private val onItemClickListener = object : CategoryAdapter.OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             val catListIntent = Intent(this@MainActivity, VenuesListActivity::class.java)
 
             val categoryModel: CategoryModel =   mCategoriesListNw[position]
-            catListIntent.putExtra("name", categoryModel.categoryName)
-            catListIntent.putExtra("categoryID", categoryModel.categoryId)
+
+            val mBundle = Bundle()
+            mBundle.putParcelable(CATEGORY_MODEL_KEY, categoryModel)
+            catListIntent.putExtras(mBundle)
 
             startActivity(catListIntent)
         }
@@ -284,14 +296,5 @@ class MainActivity : AppCompatActivity(), LocationListener {
         alertDialogBuilder.setNegativeButton("Cancel") { dialog, id -> dialog.cancel() }
         val alert = alertDialogBuilder.create()
         alert.show()
-    }
-
-    companion object {
-        //The App specific constant when requesting the Location Permission
-        private val PERMISSION_ACCESS_FINE_LOCATION = 1
-        var mVenueList = ArrayList<VenueModel>()
-        var mCategoriesList = ArrayList<String>()
-        var mCategoriesListNw = ArrayList<CategoryModel>()
-        private var COLUMN_COUNT: Int = 0
     }
 }

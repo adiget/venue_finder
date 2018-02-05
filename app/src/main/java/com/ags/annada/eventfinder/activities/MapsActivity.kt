@@ -7,9 +7,14 @@ import android.support.v4.app.FragmentActivity
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 
 import com.ags.annada.eventfinder.R
+import com.ags.annada.eventfinder.globals.Constants
+import com.ags.annada.eventfinder.model.categoryapi.CategoryModel
+import com.ags.annada.eventfinder.model.venueapi.FourSquareResults
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,8 +22,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_maps.*
 
-class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private var mMap: GoogleMap? = null
     private var venueID: String? = null
@@ -30,18 +36,24 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWin
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-        actionBar!!.setHomeButtonEnabled(true)
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        val ab = getSupportActionBar()
+        if (ab != null) {
+            ab!!.setDisplayHomeAsUpEnabled(true)
+        }
 
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val venue = intent.extras
-        venueID = venue!!.getString("ID")
-        venueName = venue.getString("name")
-        venueLatitude = venue.getDouble("latitude")
-        venueLongitude = venue.getDouble("longitude")
+        val intent = this.intent
+        val bundle = intent.extras
+
+        val fourSquareResults: FourSquareResults = bundle.getParcelable(Constants.MAPS_BUNDLE_KEY)
+        venueID = fourSquareResults.venue.id
+        venueName = fourSquareResults.venue.name
+        venueLatitude = fourSquareResults.venue.location.lat
+        venueLongitude = fourSquareResults.venue.location.lng
         title = venueName
     }
 

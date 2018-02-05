@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import com.ags.annada.eventfinder.R
 import com.ags.annada.eventfinder.activities.VenuesListActivity
+import com.ags.annada.eventfinder.extensions.enumValueOfOrNull
 import com.ags.annada.eventfinder.extensions.inflate
 import com.ags.annada.eventfinder.extensions.loadUrl
+import com.ags.annada.eventfinder.globals.CategoryMedia
 import com.ags.annada.eventfinder.model.categoryapi.CategoryModel
 import com.ags.annada.eventfinder.views.PaletteTransformation
 import com.squareup.picasso.NetworkPolicy
@@ -40,19 +42,26 @@ class CategoryAdapter(private val mContext: Context, private val mCategories: Li
 
         val selectedCategory = mCategories[position]
 
-        //holder.mCategoryId = selectedCategory.categoryId
         holder.itemView.cardNameTV.text = selectedCategory.categoryName
 
+        val catName: String = selectedCategory.categoryName.toUpperCase().replace("\\s".toRegex(), "")
+        val catEnumName: CategoryMedia? = enumValueOfOrNull<CategoryMedia>(catName)
+
+        val mediaName: String? = catEnumName?.url ?: selectedCategory.categoryIcon
+
         Picasso.with(mContext)
-                .load(selectedCategory.categoryIcon)
+                //.load(selectedCategory.categoryIcon)
+
+                .load(mediaName)
                 .transform(PaletteTransformation.instance())
                 //attempt to load the image from cache
-                .networkPolicy(NetworkPolicy.OFFLINE)
+                //.networkPolicy(NetworkPolicy.OFFLINE)
+                .fit()
                 .into(holder.itemView.cardImageView, object : PaletteTransformation.PaletteCallback(holder.itemView.cardImageView!!) {
                     public override fun onSuccess(palette: Palette) {
                         val color = palette.getLightVibrantColor(
                                 mContext.resources.getColor(R.color.light_sky_blue))
-                        holder.itemView.cardImageView.setBackgroundColor(color)
+                        holder.itemView.categoryCard.setBackgroundColor(color)
                         selectedCategory.color = color
                     }
 
@@ -60,6 +69,7 @@ class CategoryAdapter(private val mContext: Context, private val mCategories: Li
                         //Try again online if cache failed
                         Picasso.with(mContext)
                                 .load(selectedCategory.categoryIcon)
+                                //.load(mediaName)
                                 .into(holder.itemView.cardImageView, object : Callback {
                                     override fun onSuccess() {}
 

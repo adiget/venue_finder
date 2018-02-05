@@ -30,7 +30,7 @@ interface APIs {
     fun searchVenuesByCategory(@Query("ll") ll: String,
                                @Query("intent") category: String): Call<FourSquareJSON>
 
-    @GET(Constants.VENUES_BY_CATEGORIES_ENDPOINT + "v=20170101" + "&client_id=" + Constants.CLIENT_ID + "&client_secret=" + Constants.CLIENT_SECRETE)
+    @GET(Constants.VENUES_BY_CATEGORIES_ENDPOINT + "v=20170101" + "&venuePhotos=1" + "&client_id=" + Constants.CLIENT_ID + "&client_secret=" + Constants.CLIENT_SECRETE)
     fun searchVenuesByCategoryID(@Query("ll") ll: String,
                                  @Query("categoryId") categoryId: String): Call<FourSquareJSON>
 
